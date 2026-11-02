@@ -1,0 +1,7 @@
+"matriz","metric","F","p","lingoes","permutations","p_holm"
+"ASV","Bray_Curtis",0.280658476581032,0.7894,1.12919656264365e-16,9999,1
+"ASV","Jaccard",0.120743792463488,0.931,0,9999,1
+"ASV","Aitchison",0.717366294828177,0.589,3.50184117814401e-12,9999,1
+"Genero_sensibilidade","Bray_Curtis",0.522488673190595,0.582,5.42108230125395e-19,9999,1
+"Genero_sensibilidade","Jaccard",0.0519640279865747,0.9833,4.5102810375397e-17,9999,1
+"Genero_sensibilidade","Aitchison",0.143387878213971,0.927,8.40383319229984e-13,9999,1

@@ -1,0 +1,17 @@
+sample_id	sequencing_batch	label	cultivar	role
+L1_Go043789	Lote 1	T1-B2	BL-69	raiz
+L1_Go043790	Lote 1	T1-B4	BL-69	raiz
+L1_Go043791	Lote 1	T2-B1	BL-65	raiz
+L1_Go043792	Lote 1	T2-B4	BL-65	raiz
+L1_Go043793	Lote 1	T3-B2	BL-74	raiz
+L1_Go043794	Lote 1	T3-B4	BL-74	raiz
+L1_Go043795	Lote 1	T4-B1	BL-183	raiz
+L1_Go043796	Lote 1	T4-B4	BL-183	raiz
+L2_Go045834	Lote 2	T5-B2	BL-69	raiz
+L2_Go045835	Lote 2	T5-B4	BL-69	raiz
+L2_Go045836	Lote 2	T6-B1	BL-65	raiz
+L2_Go045837	Lote 2	T6-B4	BL-65	raiz
+L2_Go045838	Lote 2	T7-B1	BL-74	raiz
+L2_Go045839	Lote 2	T7-B3	BL-74	raiz
+L2_Go045840	Lote 2	T8-B1	BL-183	raiz
+L2_Go045841	Lote 2	T8-B4	BL-183	raiz

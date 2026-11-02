@@ -1,0 +1,2 @@
+"bacteria_only","root_samples","pathways","permutations_per_seed","seed1","seed2","significant_seed1","significant_seed2","significant_both_seeds","significant_either_seed","status_changes","spearman_p","minimum_q_seed1","minimum_q_seed2"
+TRUE,16,534,99999,20261021,20261022,106,104,104,106,2,0.999916839150081,0.0165821052631579,0.0182045454545455

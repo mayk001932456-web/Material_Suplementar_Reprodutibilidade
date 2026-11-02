@@ -1,0 +1,2 @@
+"analysis","model","samples","features","df_cultivar","df_residual","SS_batch","SS_cultivar_partial","SS_residual_full_model","pseudo_F","partial_R2","R2_total","exact_p_upper_tail","exceedances","permutations"
+"PICRUSt2 bacteria-only KO profile; Bray-Curtis PERMANOVA","cultivar + sequencing_batch; cultivar partial effect conditional on batch",16,8364,3,11,0.00420932465972178,0.0244537877973828,0.0229665915601686,3.90410080466226,0.515680982073137,0.47363796215453,0.00515495086923658,32736,6350400

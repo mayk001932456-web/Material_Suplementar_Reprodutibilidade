@@ -1,0 +1,2 @@
+"analysis","df_cultivar","df_residual","permutations","F_observed","F_min","F_median","F_max","exceedances","exact_p_upper_tail","note"
+"Exact within-batch permutation distribution",3,11,6350400,3.90410080466226,0.104054727375953,0.891786450031346,6.8452987644291,32736,0.00515495086923658,"F recomputed for every assignment using SS_residual = SS_total - SS_batch - SS_cultivar; no Monte Carlo sampling."

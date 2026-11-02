@@ -1,0 +1,43 @@
+# Figura 9: PCoA exploratoria dos perfis de KOs preditos pelo PICRUSt2.
+# A matriz de entrada tem 17 amostras; a figura inclui apenas as 16 raizes.
+args <- commandArgs(trailingOnly = FALSE)
+script_arg <- grep("^--file=", args, value = TRUE)
+if (!length(script_arg)) stop("Execute com Rscript para localizar o pacote.")
+script_file <- normalizePath(sub("^--file=", "", script_arg[1]), winslash = "/", mustWork = TRUE)
+source(file.path(dirname(dirname(script_file)), "package_config.R"))
+meta <- read.delim(file.path(INPUTS_ROOT, "metadados_16_raizes.tsv"), stringsAsFactors=FALSE, check.names=FALSE)
+ko_path <- file.path(INPUTS_ROOT, "picrust2", "KO_metagenome_out", "pred_metagenome_unstrat_descrip.tsv.gz")
+ko0 <- read.delim(gzfile(ko_path), stringsAsFactors=FALSE, check.names=FALSE)
+stopifnot(nrow(meta)==16L, ncol(ko0)>=18L, all(c("sample_id","cultivar","sequencing_batch") %in% names(meta)))
+ids <- sub("^L[12]_", "", meta$sample_id)
+cols0 <- names(ko0)[-(1:2)]
+idx <- match(ids, sub("^X", "", cols0))
+stopifnot(!anyNA(idx), !anyDuplicated(ids))
+X <- t(as.matrix(ko0[, idx+2L, drop=FALSE]))
+storage.mode(X) <- "numeric"
+stopifnot(all(is.finite(X)), all(X>=0), all(rowSums(X)>0))
+X <- X/rowSums(X)
+# Bray-Curtis distance on relative KO abundances.
+n <- nrow(X); D <- matrix(0,n,n,dimnames=list(meta$label,meta$label))
+for(i in seq_len(n)) for(j in seq_len(n)) D[i,j] <- sum(abs(X[i,]-X[j,]))/sum(X[i,]+X[j,])
+J <- diag(n)-matrix(1/n,n,n); G <- -0.5*J%*%(D^2)%*%J
+E <- eigen((G+t(G))/2, symmetric=TRUE)
+pos <- which(E$values>sqrt(.Machine$double.eps)*max(abs(E$values)))
+stopifnot(length(pos)>=2L)
+coords <- E$vectors[,1:2,drop=FALSE] %*% diag(sqrt(E$values[1:2]),2)
+pct <- 100*E$values[1:2]/sum(E$values[pos])
+cols <- c("BL-65"="#E74C3C", "BL-69"="#3498DB", "BL-74"="#2ECC71", "BL-183"="#F39C12")
+pch <- ifelse(meta$sequencing_batch=="Lote 1",21,24)
+outdir <- file.path(RESULTS_ROOT,"figuras"); dir.create(outdir,recursive=TRUE,showWarnings=FALSE)
+png(file.path(outdir,"Figura_09_PCoA_KO.png"),width=2400,height=1700,res=300)
+par(mar=c(5,5,4,10),family="sans",las=1,xpd=NA)
+plot(coords[,1],coords[,2],type="n",xlab=sprintf("PCoA 1 (%.1f%%)",pct[1]),ylab=sprintf("PCoA 2 (%.1f%%)",pct[2]),main="PCoA dos perfis funcionais preditos de KOs")
+abline(h=0,v=0,col="#DDDDDD",lty=2)
+points(coords[,1],coords[,2],pch=pch,bg=cols[meta$cultivar],col="black",cex=1.5)
+label_pos <- ifelse(meta$label=="T7-B3",2,3)
+text(coords[,1],coords[,2],labels=meta$label,pos=label_pos,cex=0.7,offset=0.45,xpd=NA)
+legend("topright",inset=c(-0.34,0),legend=names(cols),pch=21,pt.bg=cols,col="black",title="Cultivar",bty="n",cex=0.85,xpd=NA)
+legend("bottomright",inset=c(-0.34,0),legend=c("Lote 1","Lote 2"),pch=c(21,24),pt.bg="grey80",title="Forma",bty="n",cex=0.85,xpd=NA)
+dev.off()
+write.csv(data.frame(sample=meta$label,cultivar=meta$cultivar,batch=meta$sequencing_batch,PCoA1=coords[,1],PCoA2=coords[,2]),file.path(outdir,"Figura_09_PCoA_KO_coordenadas.csv"),row.names=FALSE)
+

@@ -1,0 +1,7 @@
+Rarefacao hipergeometrica sem reposicao; 16 amostras radiculares.
+Profundidade: 70554
+Subamostragens por amostra: 100
+Metricas: riqueza observada, Chao1, Shannon e Pielou.
+O solo-controle nao foi incluido nas comparacoes entre cultivares.
+Semente: 20261019
+R: R version 4.6.1 (2026-06-24 ucrt)

@@ -1,0 +1,11 @@
+# Shared paths for the supplementary analysis package.
+script_args <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (!length(script_args)) stop("Run this script with Rscript so its location can be resolved.")
+script_file <- normalizePath(sub("^--file=", "", script_args[1]), winslash = "/", mustWork = TRUE)
+script_dir <- dirname(script_file)
+PACKAGE_ROOT <- normalizePath(file.path(script_dir, "..", ".."), winslash = "/", mustWork = TRUE)
+INPUTS_ROOT <- file.path(PACKAGE_ROOT, "dados", "entradas")
+RESULTS_ROOT <- file.path(PACKAGE_ROOT, "resultados")
+dir.create(RESULTS_ROOT, recursive = TRUE, showWarnings = FALSE)
+dir.create(file.path(RESULTS_ROOT, "permanova"), recursive = TRUE, showWarnings = FALSE)
+dir.create(file.path(RESULTS_ROOT, "figuras"), recursive = TRUE, showWarnings = FALSE)
